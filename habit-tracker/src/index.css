@@ -4,6 +4,27 @@
 
 @layer base {
   body {
-    @apply bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen;
+    @apply bg-gradient-to-br from-purple-100 via-pink-100 to-orange-100 min-h-screen;
+  }
+}
+
+@layer utilities {
+  .gradient-border {
+    background: linear-gradient(white, white) padding-box,
+                linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #4facfe 75%, #00f2fe 100%) border-box;
+    border: 2px solid transparent;
+  }
+
+  .shimmer {
+    animation: shimmer 2s infinite;
+  }
+
+  @keyframes shimmer {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
   }
 }

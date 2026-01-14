@@ -81,27 +81,27 @@ const Calendar = ({ habits, completions, currentMonth, setCurrentMonth, toggleCo
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-lg p-6">
+    <div className="bg-gradient-to-br from-white to-purple-50 rounded-2xl shadow-2xl p-6 border border-purple-100">
       {/* Month Navigation */}
       <div className="flex items-center justify-between mb-6">
         <button
           onClick={previousMonth}
-          className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+          className="p-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:from-purple-600 hover:to-pink-600 rounded-xl transition-all shadow-md hover:shadow-lg transform hover:scale-105"
           aria-label="Previous month"
         >
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
           </svg>
         </button>
-        <h2 className="text-2xl font-bold text-gray-800">
+        <h2 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
           {monthNames[currentMonth.getMonth()]} {currentMonth.getFullYear()}
         </h2>
         <button
           onClick={nextMonth}
-          className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+          className="p-3 bg-gradient-to-r from-pink-500 to-orange-500 text-white hover:from-pink-600 hover:to-orange-600 rounded-xl transition-all shadow-md hover:shadow-lg transform hover:scale-105"
           aria-label="Next month"
         >
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
           </svg>
         </button>
@@ -109,8 +109,12 @@ const Calendar = ({ habits, completions, currentMonth, setCurrentMonth, toggleCo
 
       {/* Day Headers */}
       <div className="grid grid-cols-7 gap-2 mb-2">
-        {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
-          <div key={day} className="text-center text-sm font-semibold text-gray-600 py-2">
+        {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day, idx) => (
+          <div key={day} className={`text-center text-sm font-bold py-2 rounded-lg ${
+            idx === 0 ? 'text-red-600 bg-red-50' :
+            idx === 6 ? 'text-blue-600 bg-blue-50' :
+            'text-purple-700 bg-purple-50'
+          }`}>
             {day}
           </div>
         ))}
@@ -129,25 +133,33 @@ const Calendar = ({ habits, completions, currentMonth, setCurrentMonth, toggleCo
               onClick={() => handleDateClick(date)}
               disabled={!date || isFuture}
               className={`
-                aspect-square p-2 rounded-lg border-2 transition-all relative
+                aspect-square p-2 rounded-xl border-2 transition-all relative font-semibold
                 ${!date ? 'invisible' : ''}
-                ${isFuture ? 'bg-gray-50 text-gray-300 cursor-not-allowed' : 'cursor-pointer'}
-                ${isToday(date) ? 'border-blue-500' : 'border-gray-200'}
-                ${selected ? 'ring-2 ring-blue-500 ring-offset-2' : ''}
-                ${!isFuture && date ? 'hover:border-blue-300 hover:shadow-md' : ''}
+                ${isFuture ? 'bg-gray-100 text-gray-400 cursor-not-allowed' : 'cursor-pointer bg-white hover:bg-gradient-to-br hover:from-purple-50 hover:to-pink-50'}
+                ${isToday(date) ? 'border-orange-400 bg-gradient-to-br from-orange-50 to-yellow-50 shadow-lg ring-2 ring-orange-300' : 'border-purple-200'}
+                ${selected ? 'ring-4 ring-pink-400 ring-offset-2 shadow-xl scale-105' : ''}
+                ${!isFuture && date && percentage === 100 ? 'bg-gradient-to-br from-green-100 to-emerald-100 border-green-400' : ''}
+                ${!isFuture && date ? 'hover:shadow-lg hover:scale-105' : ''}
               `}
             >
               {date && (
                 <>
-                  <div className="text-sm font-medium text-gray-800">
+                  <div className={`text-sm font-bold ${
+                    isToday(date) ? 'text-orange-700' :
+                    percentage === 100 ? 'text-green-700' :
+                    'text-gray-700'
+                  }`}>
                     {date.getDate()}
                   </div>
                   {!isFuture && percentage > 0 && (
                     <div className="absolute bottom-1 left-1 right-1">
-                      <div className="h-1 bg-gray-200 rounded-full overflow-hidden">
+                      <div className="h-1.5 bg-gray-200 rounded-full overflow-hidden shadow-inner">
                         <div
                           className={`h-full transition-all ${
-                            percentage === 100 ? 'bg-green-500' : 'bg-blue-500'
+                            percentage === 100 ? 'bg-gradient-to-r from-green-400 to-emerald-500' :
+                            percentage >= 66 ? 'bg-gradient-to-r from-blue-400 to-cyan-500' :
+                            percentage >= 33 ? 'bg-gradient-to-r from-yellow-400 to-orange-500' :
+                            'bg-gradient-to-r from-red-400 to-pink-500'
                           }`}
                           style={{ width: `${percentage}%` }}
                         />

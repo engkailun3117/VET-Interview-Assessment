@@ -104,12 +104,12 @@ function App() {
   return (
     <div className="min-h-screen p-4 md:p-8">
       <div className="max-w-7xl mx-auto">
-        <header className="mb-8">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-2">
+        <header className="mb-8 text-center">
+          <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-orange-500 bg-clip-text text-transparent mb-3 drop-shadow-lg">
             Habit Tracker
           </h1>
-          <p className="text-gray-600 text-lg">
-            Build better habits, one day at a time
+          <p className="text-gray-700 text-xl font-medium">
+            Build better habits, one day at a time ✨
           </p>
         </header>
 

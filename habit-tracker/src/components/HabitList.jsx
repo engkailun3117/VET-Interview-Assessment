@@ -1,11 +1,11 @@
 const HabitList = ({ habits, onAddHabit, onEditHabit, onDeleteHabit }) => {
   return (
-    <div className="bg-white rounded-lg shadow-lg p-6">
+    <div className="bg-gradient-to-br from-white to-pink-50 rounded-2xl shadow-2xl p-6 border border-pink-100">
       <div className="flex items-center justify-between mb-6">
-        <h2 className="text-2xl font-bold text-gray-800">My Habits</h2>
+        <h2 className="text-2xl font-bold bg-gradient-to-r from-pink-600 to-orange-600 bg-clip-text text-transparent">My Habits</h2>
         <button
           onClick={onAddHabit}
-          className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors flex items-center gap-2"
+          className="px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-xl hover:from-blue-600 hover:to-purple-700 transition-all shadow-md hover:shadow-lg flex items-center gap-2 font-semibold transform hover:scale-105"
         >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
@@ -16,52 +16,64 @@ const HabitList = ({ habits, onAddHabit, onEditHabit, onDeleteHabit }) => {
 
       {habits.length === 0 ? (
         <div className="text-center py-12">
-          <svg
-            className="w-16 h-16 mx-auto text-gray-300 mb-4"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
-            />
-          </svg>
-          <h3 className="text-lg font-medium text-gray-600 mb-2">No habits yet</h3>
-          <p className="text-gray-500 mb-4">Start building better habits today!</p>
+          <div className="bg-gradient-to-br from-purple-100 to-pink-100 w-20 h-20 rounded-full mx-auto mb-4 flex items-center justify-center">
+            <svg
+              className="w-10 h-10 text-purple-600"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+              />
+            </svg>
+          </div>
+          <h3 className="text-lg font-bold text-gray-700 mb-2">No habits yet</h3>
+          <p className="text-gray-600 mb-4">Start building better habits today! ✨</p>
           <button
             onClick={onAddHabit}
-            className="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+            className="px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded-xl hover:from-purple-600 hover:to-pink-700 transition-all shadow-lg hover:shadow-xl font-semibold transform hover:scale-105"
           >
             Create Your First Habit
           </button>
         </div>
       ) : (
         <div className="space-y-3">
-          {habits.map(habit => (
+          {habits.map((habit, idx) => (
             <div
               key={habit.id}
-              className="flex items-center gap-3 p-4 rounded-lg border border-gray-200 hover:border-blue-300 transition-colors group"
+              className="flex items-center gap-3 p-4 rounded-xl border-2 border-transparent bg-gradient-to-r from-white to-purple-50 hover:border-purple-300 transition-all group shadow-sm hover:shadow-lg transform hover:scale-102"
+              style={{
+                borderColor: `${habit.color}20`,
+                background: `linear-gradient(135deg, white 0%, ${habit.color}10 100%)`
+              }}
             >
               <div
-                className="w-4 h-4 rounded-full flex-shrink-0"
+                className="w-6 h-6 rounded-full flex-shrink-0 shadow-md ring-2 ring-white"
                 style={{ backgroundColor: habit.color }}
               />
               <div className="flex-1 min-w-0">
-                <h3 className="font-medium text-gray-800 truncate">{habit.name}</h3>
+                <h3 className="font-bold text-gray-800 truncate text-lg">{habit.name}</h3>
                 {habit.description && (
-                  <p className="text-sm text-gray-500 truncate">{habit.description}</p>
+                  <p className="text-sm text-gray-600 truncate">{habit.description}</p>
                 )}
-                <p className="text-xs text-gray-400 mt-1">
-                  {habit.frequency === 'daily' ? 'Daily' : 'Weekly'}
-                </p>
+                <div className="flex items-center gap-2 mt-1">
+                  <span className={`text-xs font-semibold px-2 py-1 rounded-full ${
+                    habit.frequency === 'daily'
+                      ? 'bg-gradient-to-r from-blue-100 to-cyan-100 text-blue-700'
+                      : 'bg-gradient-to-r from-green-100 to-emerald-100 text-green-700'
+                  }`}>
+                    {habit.frequency === 'daily' ? '📅 Daily' : '📆 Weekly'}
+                  </span>
+                </div>
               </div>
               <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                 <button
                   onClick={() => onEditHabit(habit)}
-                  className="p-2 text-blue-500 hover:bg-blue-50 rounded-lg transition-colors"
+                  className="p-2 text-blue-600 bg-blue-50 hover:bg-blue-100 rounded-lg transition-colors shadow-sm"
                   aria-label="Edit habit"
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -79,7 +91,7 @@ const HabitList = ({ habits, onAddHabit, onEditHabit, onDeleteHabit }) => {
                       onDeleteHabit(habit.id);
                     }
                   }}
-                  className="p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+                  className="p-2 text-red-600 bg-red-50 hover:bg-red-100 rounded-lg transition-colors shadow-sm"
                   aria-label="Delete habit"
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
