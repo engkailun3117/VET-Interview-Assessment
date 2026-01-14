@@ -4,7 +4,7 @@ A motivational personal development tool that helps users establish and maintain
 
 ## 🔗 Live Demo
 
-[Deployment URL will be added after deployment]
+https://vet-interview-assessment.vercel.app/
 
 ## 📋 Project Choice
 
@@ -395,4 +395,4 @@ This project was created as an assessment submission for VET Interview Assessmen
 
 ## 👤 Author
 
-Created as part of the VET Interview Assessment by the candidate.
+Created as part of the VET Interview Assessment by the candidate Eng Kai Lun.
