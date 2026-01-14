@@ -14,6 +14,9 @@ I chose this project because it presents an excellent opportunity to create a pr
 
 ## 🛠️ Justification of Tools
 
+### Claude Pro
+- Claude Pro contains powerful functionality - Claude Code that connects GitHub repository to the AI for system level development.
+
 ### Frontend Framework: **React 19 + Vite**
 - **React 19**: Latest version providing improved hooks, better performance, and modern development patterns. React's component-based architecture is perfect for building reusable UI elements like calendar cells and habit cards.
 - **Vite**: Ultra-fast build tool and development server. Chosen for its instant hot module replacement (HMR), optimized builds, and seamless React integration. Significantly faster than traditional webpack-based setups.
@@ -46,6 +49,11 @@ I chose this project because it presents an excellent opportunity to create a pr
 - Global edge network for fast loading times
 
 ## 🎯 High-Level Approach
+
+### Prompt
+
+I use a single-level prompt to get the base framework of the web application (Claude Pro supports a powerful system architecture building). Then, follows with a chain of prompts for enhancing the result such as UI design.
+
 
 ### Architecture Strategy
 
@@ -113,71 +121,55 @@ This structure optimizes for:
 
 ## 📝 Final Prompts
 
-Since this is a traditional software development project rather than an LLM-powered application, the "prompts" refer to the development approach and key implementation decisions:
+First prompt (get system framework):
+_________________________________________________________________________________
+The Habit Tracker with Calendar View
+• Product Details: A habit tracking application with a primary calendar interface.
+Users define habits and mark them complete on the calendar grid. The
+application calculates and displays statistics like completion streaks and
+monthly consistency.
+• Objective: The objective is to build a motivational personal development tool
+that helps users establish and maintain habits. The application will provide a
+clear, visual representation of their progress through a calendar interface and
+insightful statistics.
+• Target User: An individual focused on personal development who wants a
+visual and statistical way to track their daily or weekly habits.
+Submission Requirements
+Format: Your submission should be a link to a public GitHub repository and
+deployed. Please include the link in the email.
+Repository Contents: The repository must contain all the code, prompts, and
+documentation needed to understand and run your project. It must include a
+README.md file.
+Deployment URL (Optional): If you choose to deploy your project as a live
+service (e.g., as a simple web endpoint or a basic frontend), please include the
+publicly accessible URL in your README.md. This is not required but is a
+welcome addition.
+README.md Documentation
+Your README.md is the most critical part of the assessment. It should clearly explain
+your work and must include the following sections:
+Project Choice: State which of the six ideas you chose.
+Justification of Tools: Explain why you chose your specific tools (e.g., "I
+chose GPT-4 for its strong reasoning skills," "I used Python with the requests
+library for its simplicity in making API calls," etc.).
+High-Level Approach: Describe your strategy. Did you use a single prompt or
+a chain? How did you structure the logic?
+Final Prompts: A clear, copy-pastable version of the final prompt(s) you
+engineered.
+Instructions: A step-by-step guide on how to run your project and reproduce
+your results.
+Challenges & Iterations: Briefly describe any challenges you faced and how
+you iterated on your prompts to solve them.
+______________________________________________________________________________
 
-### Core Development Principles
+Second prompt (Change accessibility of the published web applicaition):
+I have deployed Vercel and it works. How can I manage the access to allow everyone access, no need accept manually 1 by 1
+_____________________________________________________________________________
 
-```
-Build a habit tracker with these requirements:
-1. Calendar-first interface showing 30+ days at a glance
-2. Visual progress indicators using color-coded completion bars
-3. Statistical insights including:
-   - Current streak (consecutive days of completion)
-   - Best streak (historical maximum)
-   - Monthly consistency (% of days completed)
-4. Intuitive habit management (add, edit, delete with color customization)
-5. Responsive design working on mobile and desktop
-6. Data persistence across browser sessions
-7. No user accounts needed - single-user local storage
-8. Clean, modern UI with gradient backgrounds and smooth transitions
-```
+Third prompt (make the UI more colorful):
+make the UI more colorful -> rainbow gradient (purple → pink → orange)
+_____________________________________________________________________________
 
-### Algorithm Design: Streak Calculation
 
-```javascript
-/**
- * Calculate current streak for a habit
- *
- * Logic:
- * 1. Start from yesterday (today doesn't count until tomorrow)
- * 2. Count backwards through consecutive completed days
- * 3. Stop at first gap
- * 4. Add today if completed
- *
- * Example:
- * - Completed: Jan 14, 13, 12, 11, 10, 8, 7
- * - Current Date: Jan 14
- * - Streak: 5 (Jan 10-14, gap on Jan 9)
- */
-const calculateStreak = (habitId) => {
-  let streak = 0;
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-
-  let checkDate = new Date(today);
-  checkDate.setDate(checkDate.getDate() - 1);
-
-  while (true) {
-    const dateKey = checkDate.toISOString().split('T')[0];
-    const dayCompletions = completions[dateKey] || [];
-
-    if (dayCompletions.includes(habitId)) {
-      streak++;
-      checkDate.setDate(checkDate.getDate() - 1);
-    } else {
-      break;
-    }
-  }
-
-  // Include today if completed
-  const todayKey = today.toISOString().split('T')[0];
-  if ((completions[todayKey] || []).includes(habitId)) {
-    streak++;
-  }
-
-  return streak;
-};
-```
 
 ## 🚀 Instructions
 
