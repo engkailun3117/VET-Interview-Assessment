@@ -161,11 +161,13 @@ Challenges & Iterations: Briefly describe any challenges you faced and how
 you iterated on your prompts to solve them.
 ______________________________________________________________________________
 
-Second prompt (Change accessibility of the published web applicaition):
+Second prompt (Change accessibility of the published web application):
+_____________________________________________________________________________
 I have deployed Vercel and it works. How can I manage the access to allow everyone access, no need accept manually 1 by 1
 _____________________________________________________________________________
 
 Third prompt (make the UI more colorful):
+_____________________________________________________________________________
 make the UI more colorful -> rainbow gradient (purple → pink → orange)
 _____________________________________________________________________________
 
