@@ -121,7 +121,7 @@ This structure optimizes for:
 
 ## 📝 Final Prompts
 
-First prompt (get system framework):
+### First prompt (get system framework):
 
 The Habit Tracker with Calendar View
 • Product Details: A habit tracking application with a primary calendar interface.
@@ -161,12 +161,12 @@ Challenges & Iterations: Briefly describe any challenges you faced and how
 you iterated on your prompts to solve them.
 ______________________________________________________________________________
 
-Second prompt (Change accessibility of the published web application):
+### Second prompt (Change accessibility of the published web application):
 
 I have deployed Vercel and it works. How can I manage the access to allow everyone access, no need accept manually 1 by 1
 _____________________________________________________________________________
 
-Third prompt (make the UI more colorful):
+### Third prompt (make the UI more colorful):
 
 make the UI more colorful -> rainbow gradient (purple → pink → orange)
 _____________________________________________________________________________
